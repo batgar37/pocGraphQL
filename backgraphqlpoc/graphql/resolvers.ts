@@ -21,6 +21,15 @@ export const resolvers = {
       return db.authors.find((author) => author.id === args.id);
     },
   },
+  Game:{
+
+    reviews(parent){
+
+        return db.reviews.filter((review) => review.game_id === parent.id);
+
+    }
+
+},
   Review: {
     game(parent) {
       return db.games.find((game) => game.id === parent.game_id);
