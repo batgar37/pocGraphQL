@@ -31,9 +31,7 @@ export const resolvers = {
   },
   Mutation: {
     deleteReview(parent, args) {
-      db.reviews = db.reviews.filter((review) => review.id !== args.id);
-
-      return db.reviews;
+      return db.reviews.filter((review) => review.id !== args.id);
     },
     addReview(parent, args) {
       let review = {
