@@ -29,4 +29,30 @@ export const resolvers = {
       return db.authors.find((author) => author.id === parent.author_id);
     },
   },
+  Mutation: {
+    deleteReview(parent, args) {
+      db.reviews = db.reviews.filter((review) => review.id !== args.id);
+
+      return db.reviews;
+    },
+    addReview(parent, args) {
+      let review = {
+        ...args.review,
+        id: Math.floor(Math.random() * 100000).toString(),
+      };
+      db.reviews.push(review);
+
+      return review;
+    },
+    updateReview(parent, args) {
+      db.reviews = db.reviews.map((review) => {
+        if (review.id === args.id) {
+          return { ...review, ...args.edits };
+        }
+        return review;
+      });
+
+      return db.reviews.find((review) => review.id === args.id);
+    },
+  },
 };

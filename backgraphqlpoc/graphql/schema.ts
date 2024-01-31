@@ -22,11 +22,31 @@ export const typeDefs = `#graphql
     }
 
     type Query {
-        reviews: [Review]
-        review(id: ID!): Review
         games: [Game]
         game(id: ID!): Game
+        reviews: [Review]
+        review(id: ID!): Review
         authors: [Author]
         author(id: ID!): Author
+    }
+
+    type Mutation {
+        deleteReview(id: ID!): [Review]
+        addReview(review: AddReviewInput): Review
+        updateReview(id: ID!, edits: EditReviewInput!): Review
+    }
+
+    input AddReviewInput {
+        rating: Int!,
+        content: String!,
+        game_id: String!,
+        author_id: String!
+    }
+    
+    input EditReviewInput {
+        rating: Int,
+        content: String,
+        game_id: String,
+        author_id: String
     }
 `;
