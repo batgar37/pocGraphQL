@@ -1,8 +1,9 @@
-- Start the project
+# Start the project
 
 this project use nodemon
-install nodemon globaly using
-npm install -g nodemon
+install nodemon globaly using : 
+- npm install -g nodemon
 
-npm install
-npm start
+then load the project :
+- npm install
+- npm start
