@@ -34,6 +34,11 @@ export const resolvers = {
       return db.authors.find((author) => author.id === parent.author_id);
     },
   },
+  Author: {
+    reviews(parent) {
+      return db.reviews.filter((review) => review.author_id === parent.id);
+    },
+  },
   Mutation: {
     deleteReview(parent, args) {
       db.reviews = db.reviews.filter((review) => review.id !== args.id);
@@ -72,12 +77,10 @@ export const resolvers = {
 
       return db.games.find((g) => g.id === args.edits.id);
     },
-
     deleteGame(parent, args) {
       db.games = db.games.filter((game) => game.id !== args.id);
       return db.games;
     },
-
     addGame(_, args) {
       let id = 1;
       db.games.forEach((element) => {
@@ -91,6 +94,29 @@ export const resolvers = {
       };
       db.games.push(game);
       return game;
+    },
+    deleteAuthor(_,args){
+      db.authors=db.authors.filter((a)=>a.id!==args.id)
+      return db.authors
+    },
+    addAuthor(_,args){
+      let   author={
+        ...args.author,
+        id:Math.floor(Math.random() *10000).toString()
+      }
+      db.authors.push(author)
+      return author
+    },
+    updateAuthor(parent, args) {
+      db.authors = db.authors.map((a) => {
+        if (a.id == args.id) {
+          return { ...a, ...args.edits };
+        }
+
+        return a;
+      });
+
+      return db.authors.find((a) => a.id === args.id);
     },
   },
 };
