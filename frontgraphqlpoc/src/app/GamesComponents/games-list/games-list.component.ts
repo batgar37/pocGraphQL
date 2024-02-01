@@ -12,7 +12,7 @@ import { Game } from '../game';
 })
 export class GamesListComponent implements OnInit {
   loading = true;
-  Games!: Game[];
+  games!: Game[];
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
@@ -31,11 +31,11 @@ export class GamesListComponent implements OnInit {
         `,
       })
       .valueChanges.subscribe((result: any) => {
-        this.Games = result.data?.Games;
+        this.games = result.data?.games;
         this.loading = result.loading;
       });
     console.log('loaded');
-    console.log(this.Games);
+    console.log(this.games);
   }
 
   CalcAverage(game: Game) {
@@ -45,5 +45,6 @@ export class GamesListComponent implements OnInit {
       reviewNB += 1;
       average += element.rating;
     });
+    return Math.floor(average / reviewNB);
   }
 }
