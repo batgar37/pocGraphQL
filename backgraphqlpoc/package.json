@@ -1,7 +1,7 @@
 {
   "name": "testgraphql",
   "version": "1.0.0",
-  "description": "",
+  "description": "this project use nodemon\r install nodemon globaly using : \r - npm install -g nodemon",
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@apollo/client": "^3.9.0",
     "@apollo/server": "^4.10.0",
     "graphql": "^16.8.1"
   },
