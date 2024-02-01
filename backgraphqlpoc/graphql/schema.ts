@@ -34,6 +34,20 @@ export const typeDefs = `#graphql
         deleteReview(id: ID!): [Review]
         addReview(review: AddReviewInput): Review
         updateReview(id: ID!, edits: EditReviewInput!): Review
+        addGame(game: AddGameInput!): Game
+        updateGame(edits: EditGame!): Game
+        deleteGame(id:ID!): [Game]
+    }
+
+    input AddGameInput {
+        title: String!,
+        platform: [String!]!
+    }
+
+    input EditGame{
+        id: ID!,
+        title: String,
+        platform: [String!]
     }
 
     input AddReviewInput {

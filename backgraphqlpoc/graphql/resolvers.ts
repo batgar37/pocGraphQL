@@ -21,6 +21,11 @@ export const resolvers = {
       return db.authors.find((author) => author.id === args.id);
     },
   },
+  Game: {
+    reviews(parent) {
+      return db.reviews.filter((review) => review.game_id === parent.id);
+    },
+  },
   Review: {
     game(parent) {
       return db.games.find((game) => game.id === parent.game_id);
@@ -31,7 +36,8 @@ export const resolvers = {
   },
   Mutation: {
     deleteReview(parent, args) {
-      return db.reviews.filter((review) => review.id !== args.id);
+      db.reviews = db.reviews.filter((review) => review.id !== args.id);
+      return db.reviews;
     },
     addReview(parent, args) {
       let review = {
@@ -51,6 +57,40 @@ export const resolvers = {
       });
 
       return db.reviews.find((review) => review.id === args.id);
+    },
+
+    updateGame(_, args) {
+      db.games = db.games.map((g) => {
+        console.log(`game id to modify is ${args.edits.id}`);
+        if (g.id == args.edits.id) {
+          console.log(`game id is ${g.id}`);
+          return { ...g, ...args.edits };
+        }
+
+        return g;
+      });
+
+      return db.games.find((g) => g.id === args.edits.id);
+    },
+
+    deleteGame(parent, args) {
+      db.games = db.games.filter((game) => game.id !== args.id);
+      return db.games;
+    },
+
+    addGame(_, args) {
+      let id = 1;
+      db.games.forEach((element) => {
+        if (element.id == id) {
+          id += 1;
+        }
+      });
+      let game = {
+        id: id.toString(),
+        ...args.game,
+      };
+      db.games.push(game);
+      return game;
     },
   },
 };
