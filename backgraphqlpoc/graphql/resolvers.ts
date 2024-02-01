@@ -66,15 +66,16 @@ export const resolvers = {
       return db.games;
     },
 
-    addGame(parent, args) {
+    addGame(_, args) {
       let id = 1;
-      db.games.array.forEach((element) => {
-        if (element.id >= id) {
-          id = element.id + 1;
+      db.games.forEach((element) => {
+        console.log(element.id);
+        if (element.id == id) {
+          id += 1;
         }
       });
       let game = {
-        id: id,
+        id: id.toString(),
         ...args.game,
       };
       db.games.push(game);
