@@ -59,7 +59,19 @@ export const resolvers = {
       return db.reviews.find((review) => review.id === args.id);
     },
 
-    updateGame(parent, args) {},
+    updateGame(_, args) {
+      db.games = db.games.map((g) => {
+        console.log(`game id to modify is ${args.edits.id}`);
+        if (g.id == args.edits.id) {
+          console.log(`game id is ${g.id}`);
+          return { ...g, ...args.edits };
+        }
+
+        return g;
+      });
+
+      return db.games.find((g) => g.id === args.edits.id);
+    },
 
     deleteGame(parent, args) {
       db.games = db.games.filter((game) => game.id !== args.id);
@@ -69,7 +81,6 @@ export const resolvers = {
     addGame(_, args) {
       let id = 1;
       db.games.forEach((element) => {
-        console.log(element.id);
         if (element.id == id) {
           id += 1;
         }

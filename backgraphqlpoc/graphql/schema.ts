@@ -46,8 +46,8 @@ export const typeDefs = `#graphql
 
     input EditGame{
         id: ID!,
-        title: String!,
-        platform: [String!]!
+        title: String,
+        platform: [String!]
     }
 
     input AddReviewInput {
