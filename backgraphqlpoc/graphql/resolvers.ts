@@ -24,7 +24,7 @@ export const resolvers = {
   Game: {
     reviews(parent) {
       return db.reviews.filter((review) => review.game_id === parent.id);
-    }
+    },
   },
   Review: {
     game(parent) {
@@ -36,7 +36,8 @@ export const resolvers = {
   },
   Mutation: {
     deleteReview(parent, args) {
-      return db.reviews.filter((review) => review.id !== args.id);
+      db.reviews = db.reviews.filter((review) => review.id !== args.id);
+      return db.reviews;
     },
     addReview(parent, args) {
       let review = {
@@ -56,6 +57,28 @@ export const resolvers = {
       });
 
       return db.reviews.find((review) => review.id === args.id);
+    },
+
+    updateGame(parent, args) {},
+
+    deleteGame(parent, args) {
+      db.games = db.games.filter((game) => game.id !== args.id);
+      return db.games;
+    },
+
+    addGame(parent, args) {
+      let id = 1;
+      db.games.array.forEach((element) => {
+        if (element.id >= id) {
+          id = element.id + 1;
+        }
+      });
+      let game = {
+        id: id,
+        ...args.game,
+      };
+      db.games.push(game);
+      return game;
     },
   },
 };
