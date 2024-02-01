@@ -25,4 +25,19 @@ export const typeDefs = `#graphql
         authors: [Author]
         author(id: ID!): Author
     }
-`;
+    type Mutation{
+        addAuthor(author:AddInputAuthor!):Author
+        deleteAuthor(id: ID!):[Author]
+        updateAuthor(id: ID!,edits:editsAuthorInput)
+    }
+    input AddInputAuthor {
+     name: String!,
+     verified: Boolean!
+    }
+    input editsAuthorInput   {
+     name: String!,
+     verified: Boolean!
+    }
+    
+    
+    `;
