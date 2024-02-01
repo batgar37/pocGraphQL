@@ -37,6 +37,9 @@ export const typeDefs = `#graphql
         addGame(game: AddGameInput!): Game
         updateGame(edits: EditGame!): Game
         deleteGame(id:ID!): [Game]
+         addAuthor(author:AddInputAuthor!):Author
+        deleteAuthor(id: ID!):[Author]
+        updateAuthor(id: ID!,edits:EditsAuthorInput):Author
     }
 
     input AddGameInput {
@@ -62,5 +65,13 @@ export const typeDefs = `#graphql
         content: String,
         game_id: String,
         author_id: String
+    }
+    input AddInputAuthor {
+     name: String!,
+     verified: Boolean!
+    }
+    input EditsAuthorInput   {
+     name: String!,
+     verified: Boolean!
     }
 `;
