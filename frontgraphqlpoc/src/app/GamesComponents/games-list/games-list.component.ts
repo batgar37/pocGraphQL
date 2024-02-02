@@ -46,6 +46,10 @@ export class GamesListComponent implements OnInit {
       reviewNB += 1;
       average += element.rating;
     });
-    return Math.floor(average / reviewNB);
+    if (reviewNB !== 0) {
+      return Math.floor(average / reviewNB);
+    } else {
+      return 'no reviews';
+    }
   }
 }

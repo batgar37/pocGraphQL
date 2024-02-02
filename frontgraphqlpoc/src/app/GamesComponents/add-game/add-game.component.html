@@ -1,1 +1,15 @@
-<p>add-game works!</p>
+<label for="title">Title of the game: </label>
+<input id="title" type="text" [formControl]="title" />
+
+<label for="platforms">platforms</label>
+<input id="title" type="text" [formControl]="platforms" />
+<p>Separate platforms Using ","</p>
+
+<div *ngIf="sent">
+  <button type="button" class="btn btn-primary" (click)="SendData()">
+    Send Data
+  </button>
+</div>
+<div *ngIf="!sent">
+  <button type="button" class="btn btn-success">Success</button>
+</div>
