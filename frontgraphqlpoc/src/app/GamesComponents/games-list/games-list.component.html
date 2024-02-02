@@ -1,0 +1,24 @@
+<div *ngIf="loading">Loading...</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Average Rating</th>
+      <th scope="col">Platform(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let game of games">
+      <th scope="row">{{ game.id }}</th>
+      <td>{{ game.title }}</td>
+      <td>{{ CalcAverage(game) }}</td>
+      <td>
+        <p *ngFor="let platforme of game.platform">{{ platforme }}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-graph-games></app-graph-games>
