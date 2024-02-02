@@ -36,8 +36,6 @@ export class GamesListComponent implements OnInit {
         this.games = result.data?.games;
         this.loading = result.loading;
       });
-    console.log('loaded');
-    console.log(this.games);
   }
 
   CalcAverage(game: Game) {

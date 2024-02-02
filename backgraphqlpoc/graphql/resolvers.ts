@@ -66,9 +66,7 @@ export const resolvers = {
 
     updateGame(_, args) {
       db.games = db.games.map((g) => {
-        console.log(`game id to modify is ${args.edits.id}`);
         if (g.id == args.edits.id) {
-          console.log(`game id is ${g.id}`);
           return { ...g, ...args.edits };
         }
 
@@ -95,17 +93,17 @@ export const resolvers = {
       db.games.push(game);
       return game;
     },
-    deleteAuthor(_,args){
-      db.authors=db.authors.filter((a)=>a.id!==args.id)
-      return db.authors
+    deleteAuthor(_, args) {
+      db.authors = db.authors.filter((a) => a.id !== args.id);
+      return db.authors;
     },
-    addAuthor(_,args){
-      let   author={
+    addAuthor(_, args) {
+      let author = {
         ...args.author,
-        id:Math.floor(Math.random() *10000).toString()
-      }
-      db.authors.push(author)
-      return author
+        id: Math.floor(Math.random() * 10000).toString(),
+      };
+      db.authors.push(author);
+      return author;
     },
     updateAuthor(parent, args) {
       db.authors = db.authors.map((a) => {
