@@ -18,13 +18,10 @@ export class AddGameComponent {
 
   constructor(private apollo: Apollo) {}
 
-  SendData() {
-    let platformedtrim = this.platforms.value?.split(',') as [];
-    platformedtrim.forEach((element) => {
-      console.log(element);
-    });
+  sendData() {
+    let platforms = this.platforms.value?.split(',') as [];
 
-    if (this.title.value != '' && platformedtrim.length > 0) {
+    if (this.title.value != '' && platforms.length > 0) {
       const ADDGAME = gql`
         mutation AddGame($game: AddGameInput!) {
           addGame(game: $game) {
@@ -40,18 +37,17 @@ export class AddGameComponent {
           variables: {
             game: {
               title: this.title.value,
-              platform: platformedtrim,
+              platform: platforms,
             },
           },
         })
-        .subscribe(
-          ({ data }) => {
-            console.log('got data', data);
+        .subscribe
+        /*({ data })console.log('got data', data);
           },
           (error) => {
             console.log('there was an error sending the query', error);
-          }
-        );
+          }*/
+        ();
       this.sent = false;
     }
   }
