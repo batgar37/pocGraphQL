@@ -23,6 +23,7 @@ export class GamesListComponent implements OnInit {
             games {
               id
               title
+              platform
               reviews {
                 rating
               }

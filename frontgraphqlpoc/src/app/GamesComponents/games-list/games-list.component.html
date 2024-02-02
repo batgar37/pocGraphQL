@@ -14,7 +14,9 @@
       <th scope="row">{{ game.id }}</th>
       <td>{{ game.title }}</td>
       <td>{{ CalcAverage(game) }}</td>
-      <td></td>
+      <td>
+        <p *ngFor="let platforme of game.platform">{{ platforme }}</p>
+      </td>
     </tr>
   </tbody>
 </table>
