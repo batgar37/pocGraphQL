@@ -1,0 +1,67 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<h2>Authors</h2>
+<div></div>
+
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>verified</th>
+        <th>reviews</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let author of authors">
+        <td>{{author.id}}</td>
+        <td>{{author.name}}</td>
+        <td>{{ author.verified ? '✔️' : '❌' }}</td>
+        <td>
+            <div *ngFor="let review of author.reviews">
+                {{ review.content }}
+            </div>
+        </td>
+        <td>
+            <button (click)="onDeleteAuthor(author.id)">Delete</button>
+        </td>
+        <td>
+            <button (click)="onUpdateAuthor(author)">Update</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<form (submit)="onSubmit()">
+    <label for="authorName">Author Name:</label>
+    <input type="text" id="authorName" [(ngModel)]="newAuthor.name" name="authorName" required>
+
+    <label for="verified">Verified:</label>
+    <input type="checkbox" id="verified" [(ngModel)]="newAuthor.verified" name="verified">
+
+    <!-- Ajouter un champ masqué pour l'id de l'auteur lors de la mise à jour -->
+    <input type="hidden" [(ngModel)]="newAuthor.id" name="authorId">
+
+    <button type="submit">{{ selectedAuthor ? 'Update' : 'Add' }} Author</button>
+</form>
