@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { NgIf, NgFor } from '@angular/common';
 import { Game } from '../game';
+import { GraphGamesComponent } from '../graph-games/graph-games.component';
 
 @Component({
   selector: 'app-games-list',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, GraphGamesComponent],
   templateUrl: './games-list.component.html',
   styleUrl: './games-list.component.css',
 })
@@ -23,6 +24,7 @@ export class GamesListComponent implements OnInit {
             games {
               id
               title
+              platform
               reviews {
                 rating
               }
@@ -45,6 +47,10 @@ export class GamesListComponent implements OnInit {
       reviewNB += 1;
       average += element.rating;
     });
-    return Math.floor(average / reviewNB);
+    if (reviewNB !== 0) {
+      return Math.floor(average / reviewNB);
+    } else {
+      return 'No reviews for the moment';
+    }
   }
 }
